@@ -1,0 +1,5 @@
+﻿  FFT.c
+D:\Code\Visual Studio\FFT\FFT.c(105,26): warning C4244: “=”: 从“double”转换到“uint16_t”，可能丢失数据
+D:\Code\Visual Studio\FFT\FFT.c(108,37): warning C4244: “=”: 从“double”转换到“uint16_t”，可能丢失数据
+D:\Code\Visual Studio\FFT\FFT.c(109,60): warning C4244: “+=”: 从“double”转换到“uint16_t”，可能丢失数据
+  FFT.vcxproj -> D:\Code\Visual Studio\FFT\Debug\FFT.exe
