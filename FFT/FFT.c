@@ -4,11 +4,12 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
+#include <time.h>
 
 
 // FFT N&LOGN CONFIG
-#define N       1024
-#define LOGN    10
+#define N       65536
+#define LOGN    16
 // FFT GEN SINE WAVE
 #define FS      0.05
 
@@ -66,7 +67,7 @@ void InvertedArray(Complex* complexIn, Complex* complexOut)
 {
     uint8_t bits[LOGN];
     uint16_t i_calc;
-    for (uint16_t i = 0; i < N; i++)
+    for (uint32_t i = 0; i < N; i++)
     {
         i_calc = i;
         for (uint16_t j = 0; j < LOGN; j++)
@@ -87,7 +88,7 @@ void InvertedArray(Complex* complexIn, Complex* complexOut)
 // LUT
 void GenWNm(void)
 {
-    for (uint16_t m = 0; m < N; m++)
+    for (uint32_t m = 0; m < N; m++)
     {
         WNm[m] = CreateComplex(cos((double)2.0 * PI * (double)m / (double)N),
             -sin((double)2.0 * PI * (double)m / (double)N));
@@ -97,15 +98,15 @@ void GenWNm(void)
 // TODO : can be optimized in loop[J]
 void FFT(Complex* complexFFT)
 {
-    uint16_t B, P;
+    uint32_t B, P;
     Complex complexTmp;
-    for (uint8_t L = 1; L <= LOGN; L++)                         // L = 1:M
+    for (uint16_t L = 1; L <= LOGN; L++)                         // L = 1:M
     {
         B = pow(2, L - 1);                                      // B = 2^(L-1)
-        for (uint16_t J = 0; J < B; J++)                        // j = 0:B-1
+        for (uint32_t J = 0; J < B; J++)                        // j = 0:B-1
         {
             P = pow(2, LOGN - L) * J;                           // P = 2^(M-L)*J
-            for (uint16_t K = J; K <= N - 1; K += pow(2, L))    // K = J:N-1:2^L
+            for (uint32_t K = J; K <= N - 1; K += pow(2, L))    // K = J:N-1:2^L
             {
                 complexTmp = AddComplex(complexFFT[K], MulComplex(complexFFT[K + B], WNm[P]));
                 complexFFT[K + B] = SubComplex(complexFFT[K], MulComplex(complexFFT[K + B], WNm[P]));
@@ -118,7 +119,7 @@ void FFT(Complex* complexFFT)
 // Sine
 void GenSine(double* sine, double fs)
 {
-    for (int i = 0; i < N; i++)
+    for (uint32_t i = 0; i < N; i++)
     {
         sine[i] = sin((double)2.0 * PI * i * (double)fs);
     }
@@ -136,16 +137,22 @@ int main()
     for (int i = 0; i < N; i++)
         fft_in[i] = CreateComplex(sine[i], 0);
 
+    clock_t t_start = clock();
+    // FFT
     InvertedArray(fft_in, fft_calc);
-
     FFT(fft_calc);
+    clock_t t_stop = clock();
 
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N; (N <= 256) ? (i++) : (i += N / 256))
     {
         printf("FFT N = %d : ", i);
         PrintComplex(fft_calc[i]);
-        printf(", Mod : %.6f\r\n", ModComplex(fft_calc[i]));
+        printf(", Mod : %.6f\n", ModComplex(fft_calc[i]));
     }
+
+    double elapsedTime = ((double)t_stop - (double)t_start) / (double)CLOCKS_PER_SEC;
+    printf("Calc FFT Elapsed Time : %.3lf second.\n", elapsedTime);
+
 
     return 0;
 }
