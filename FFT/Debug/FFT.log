@@ -1,5 +1,3 @@
 ﻿  FFT.c
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(105,26): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(108,37): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(109,60): warning C4244: “+=”: 从“double”转换到“uint32_t”，可能丢失数据
+D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(16,1): warning C4047: “初始化”:“Complex *”与“Complex **”的间接级别不同
   FFT.vcxproj -> D:\GitHub\Carrot-FFT-Library\FFT\Debug\FFT.exe
