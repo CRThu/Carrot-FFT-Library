@@ -2,39 +2,45 @@
 
 Complex CreateComplex(double Rez, double Imz)
 {
-    Complex newComplex = { Rez,Imz };
-    return newComplex;
+    Complex ComplexA = { Rez,Imz };
+    return ComplexA;
 }
 
-Complex AddComplex(Complex complexFFT, Complex complexB)
+Complex AddComplex(Complex complexA, Complex complexB)
 {
-    complexFFT.Rez += complexB.Rez;
-    complexFFT.Imz += complexB.Imz;
-    return complexFFT;
+    complexA.Rez += complexB.Rez;
+    complexA.Imz += complexB.Imz;
+    return complexA;
 }
 
-Complex SubComplex(Complex complexFFT, Complex complexB)
+Complex SubComplex(Complex complexA, Complex complexB)
 {
-    complexFFT.Rez -= complexB.Rez;
-    complexFFT.Imz -= complexB.Imz;
-    return complexFFT;
+    complexA.Rez -= complexB.Rez;
+    complexA.Imz -= complexB.Imz;
+    return complexA;
 }
 
-Complex MulComplex(Complex complexFFT, Complex complexB)
+Complex MulComplex(Complex complexA, Complex complexB)
 {
     Complex complexC = {
-        complexFFT.Rez * complexB.Rez - complexFFT.Imz * complexB.Imz,
-        complexFFT.Rez * complexB.Imz + complexFFT.Imz * complexB.Rez };
+        complexA.Rez * complexB.Rez - complexA.Imz * complexB.Imz,
+        complexA.Rez * complexB.Imz + complexA.Imz * complexB.Rez };
     return complexC;
 }
 
-double ModComplex(Complex complexIn)
+Complex ConjComplex(Complex complexA)
 {
-    return sqrt(complexIn.Rez * complexIn.Rez + complexIn.Imz * complexIn.Imz);
+    complexA.Imz = -complexA.Imz;
+    return complexA;
 }
 
-void PrintComplex(Complex complexFFT)
+double ModComplex(Complex complexA)
 {
-    printf("%c%.6f%c%.6fj", complexFFT.Rez >= 0 ? '+' : '-', fabs(complexFFT.Rez),
-        complexFFT.Imz >= 0 ? '+' : '-', fabs(complexFFT.Imz));
+    return sqrt(complexA.Rez * complexA.Rez + complexA.Imz * complexA.Imz);
+}
+
+void PrintComplex(Complex complexA)
+{
+    printf("%c%.6f%c%.6fj", complexA.Rez >= 0 ? '+' : '-', fabs(complexA.Rez),
+        complexA.Imz >= 0 ? '+' : '-', fabs(complexA.Imz));
 }

@@ -1,40 +1,24 @@
 ﻿#include "FFT.h"
-#include <malloc.h>
-
-#define PI      acos(-1.0)
 
 // FFT CONFIG
-uint32_t FFT_PLOT = 1024;
-uint32_t FFT_N = 1024;
-uint8_t FFT_LOGN = 10;
+uint32_t FFT_N = 0;
+uint8_t FFT_LOGN = 0;
 
 Complex* pWNm = (void*)0;
 
-// LUT
-Complex* GenWNm(void)
+uint32_t FFT_Init(uint32_t fft_num)
 {
-    Complex* p = &pWNm;
+    // CALC FFT CONFIG
+    FFT_LOGN = (uint8_t)ceil(log2(fft_num));
+    FFT_N = (uint32_t)pow(2, FFT_LOGN);
+
+    // MALLOC
     pWNm = (Complex*)malloc(sizeof(Complex) * FFT_N);
     if (pWNm == NULL)
         return NULL;
-    for (uint32_t m = 0; m < FFT_N; m++)
-    {
-        *p = CreateComplex(cos((double)2.0 * PI * (double)m / (double)FFT_N),
-            -sin((double)2.0 * PI * (double)m / (double)FFT_N));
-        printf("WNm[%d]=", m);
-        PrintComplex(*p);
-        printf("\r\n");
-        p++;
-    }
-    return pWNm;
-}
 
-uint32_t FFT_Init(uint32_t fft_plot)
-{
-    FFT_PLOT = fft_plot;
-    FFT_LOGN = (uint8_t)ceil(log2(FFT_PLOT));
-    FFT_N = (uint32_t)pow(2, FFT_LOGN);
-    GenWNm();
+    GenWNm(pWNm);
+
     return FFT_N;
 }
 
@@ -42,6 +26,19 @@ void FFT_DeInit()
 {
     free(pWNm);
     pWNm = NULL;
+}
+
+void GenWNm(Complex* p)
+{
+    for (uint32_t m = 0; m < FFT_N; m++)
+    {
+        *p = CreateComplex(cos((double)2.0 * PI * (double)m / (double)FFT_N),
+            -sin((double)2.0 * PI * (double)m / (double)FFT_N));
+        //printf("WNm[%d]=", m);
+        //PrintComplex(*p);
+        //printf("\r\n");
+        p++;
+    }
 }
 
 // b[n:0]->b[0:n]
@@ -60,5 +57,26 @@ void InvertedArray(Complex* complexIn, Complex* complexOut)
         }
         complexOut[index_o] = complexIn[index_i];
         //printf("%d->%d\r\n", index_o, index_i);
+    }
+}
+
+// TODO : can be optimized in loop[J]
+void FFTCalc(Complex* complexFFT)
+{
+    uint32_t B, P;
+    Complex complexTmp;
+    for (uint16_t L = 1; L <= FFT_LOGN; L++)                    // L = 1:M
+    {
+        B = pow(2, L - 1);                                      // B = 2^(L-1)
+        for (uint32_t J = 0; J < B; J++)                        // j = 0:B-1
+        {
+            P = pow(2, FFT_LOGN - L) * J;                           // P = 2^(M-L)*J
+            for (uint32_t K = J; K <= FFT_N - 1; K += pow(2, L))    // K = J:N-1:2^L
+            {
+                complexTmp = AddComplex(complexFFT[K], MulComplex(complexFFT[K + B], pWNm[P]));
+                complexFFT[K + B] = SubComplex(complexFFT[K], MulComplex(complexFFT[K + B], pWNm[P]));
+                complexFFT[K] = complexTmp;
+            }
+        }
     }
 }

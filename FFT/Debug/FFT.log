@@ -1,3 +1,2 @@
-﻿  FFT.c
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(16,1): warning C4047: “初始化”:“Complex *”与“Complex **”的间接级别不同
+﻿  main.c
   FFT.vcxproj -> D:\GitHub\Carrot-FFT-Library\FFT\Debug\FFT.exe

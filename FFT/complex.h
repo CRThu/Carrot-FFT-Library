@@ -13,10 +13,11 @@ typedef struct Complex
 }Complex;
 
 Complex CreateComplex(double Rez, double Imz);
-Complex AddComplex(Complex complexFFT, Complex complexB);
-Complex SubComplex(Complex complexFFT, Complex complexB);
-Complex MulComplex(Complex complexFFT, Complex complexB);
-double ModComplex(Complex complexIn);
-void PrintComplex(Complex complexFFT);
+Complex AddComplex(Complex complexA, Complex complexB);
+Complex SubComplex(Complex complexA, Complex complexB);
+Complex MulComplex(Complex complexA, Complex complexB); 
+Complex ConjComplex(Complex complexA);
+double ModComplex(Complex complexA);
+void PrintComplex(Complex complexA);
 
 #endif // _COMPLEX_H_
