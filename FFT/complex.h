@@ -16,8 +16,11 @@ typedef struct Complex
 Complex CreateComplex(double Rez, double Imz);
 Complex AddComplex(Complex complexA, Complex complexB);
 Complex SubComplex(Complex complexA, Complex complexB);
-Complex MulComplex(Complex complexA, Complex complexB); 
+Complex MulComplex(Complex complexA, Complex complexB);
 Complex ConjComplex(Complex complexA);
+Complex CCWRot90Complex(Complex complexA);
+Complex CCWRot180Complex(Complex complexA);
+Complex CCWRot270Complex(Complex complexA);
 double ModComplex(Complex complexA);
 void SwapComplex(Complex* complexA, Complex* complexB);
 void PrintComplex(Complex complexA);

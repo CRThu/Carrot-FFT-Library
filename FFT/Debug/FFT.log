@@ -1,8 +1,8 @@
 ﻿  FFT.c
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(18,20): warning C4047: “return”:“uint32_t”与“void *”的间接级别不同
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(95,26): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(98,41): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(99,64): warning C4244: “+=”: 从“double”转换到“uint32_t”，可能丢失数据
+D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(119,26): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
+D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(122,41): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
+D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(124,64): warning C4244: “+=”: 从“double”转换到“uint32_t”，可能丢失数据
   main.c
   正在生成代码...
+D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(65): warning C4716: “PrintWNm”: 必须返回一个值
   FFT.vcxproj -> D:\GitHub\Carrot-FFT-Library\FFT\Debug\FFT.exe

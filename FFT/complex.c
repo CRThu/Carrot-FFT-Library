@@ -34,6 +34,24 @@ Complex ConjComplex(Complex complexA)
     return complexA;
 }
 
+Complex CCWRot90Complex(Complex complexA)
+{
+    Complex complexB = { -complexA.Imz,complexA.Rez };
+    return complexB;
+}
+
+Complex CCWRot180Complex(Complex complexA)
+{
+    Complex complexB = { -complexA.Rez,-complexA.Imz };
+    return complexB;
+}
+
+Complex CCWRot270Complex(Complex complexA)
+{
+    Complex complexB = { complexA.Imz,-complexA.Rez };
+    return complexB;
+}
+
 double ModComplex(Complex complexA)
 {
     return sqrt(complexA.Rez * complexA.Rez + complexA.Imz * complexA.Imz);

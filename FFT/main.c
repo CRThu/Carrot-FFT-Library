@@ -14,9 +14,9 @@
 #define SINE_FS             0.05
 
 // TESTBENCH
-#define VERIFY_TESTBENCH    8
-//#define SPEED_TESTBENCH     1048576*256
+//#define VERIFY_TESTBENCH    10
 //#define SPEED_TESTBENCH     1048576
+#define SPEED_TESTBENCH     1048576*256
 
 // Sine
 void GenSine(Complex* sine, double fs, double cnt)
@@ -54,6 +54,9 @@ int main()
         t_stop = clock();
         InitElapsedTime = ((double)t_stop - (double)t_start) / (double)CLOCKS_PER_SEC;
 
+        // WNm For Debug
+        //PrintWNm();
+
         // MALLOC
         Complex* fft_io = NULL;
         fft_io = (Complex*)malloc(sizeof(Complex) * FFT_N);
@@ -75,7 +78,7 @@ int main()
         PROCESS_MEMORY_COUNTERS pmc;
         GetProcessMemoryInfo(handle, &pmc, sizeof(pmc));
 
-        printf("|%12d |\t%10.3lf s |\t%10.3lf s |\t%9d KB |\n", FFT_N, InitElapsedTime, CalcElapsedTime, pmc.WorkingSetSize / 1024);
+        printf("|%12ld |\t%10.3lf s |\t%10.3lf s |\t%9ld KB |\n", FFT_N, InitElapsedTime, CalcElapsedTime, (uint64_t)pmc.WorkingSetSize / 1024);
 
 #if VERIFY_TESTBENCH != 0
         for (uint32_t i = 0; i < FFT_N; (FFT_N <= VERIFY_TESTBENCH) ? (i++) : (i += FFT_N / VERIFY_TESTBENCH))
