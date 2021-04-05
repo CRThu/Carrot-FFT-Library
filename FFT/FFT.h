@@ -14,7 +14,7 @@ extern uint8_t FFT_LOGN;
 uint32_t FFT_Init(uint32_t fft_num);
 void FFT_DeInit();
 void GenWNm(Complex* p);
-void InvertedArray(Complex* complexIn, Complex* complexOut);
+void InvertedArray(Complex* complexArray);
 void FFTCalc(Complex* complexFFT);
 
 #endif // _FFT_H_

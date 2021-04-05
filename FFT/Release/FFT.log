@@ -1,12 +1,6 @@
-﻿  complex.c
-  FFT.c
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(18,20): warning C4047: “return”:“uint32_t”与“void *”的间接级别不同
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(70,26): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(73,41): warning C4244: “=”: 从“double”转换到“uint32_t”，可能丢失数据
-D:\GitHub\Carrot-FFT-Library\FFT\FFT.c(74,64): warning C4244: “+=”: 从“double”转换到“uint32_t”，可能丢失数据
-  main.c
+﻿  main.c
   正在生成代码
-  1 of 14 functions ( 7.1%) were compiled, the rest were copied from previous compilation.
+  1 of 17 functions ( 5.9%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成

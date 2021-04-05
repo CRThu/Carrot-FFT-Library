@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <math.h>
+#include <string.h>
 
 typedef struct Complex
 {
@@ -18,6 +19,7 @@ Complex SubComplex(Complex complexA, Complex complexB);
 Complex MulComplex(Complex complexA, Complex complexB); 
 Complex ConjComplex(Complex complexA);
 double ModComplex(Complex complexA);
+void SwapComplex(Complex* complexA, Complex* complexB);
 void PrintComplex(Complex complexA);
 
 #endif // _COMPLEX_H_

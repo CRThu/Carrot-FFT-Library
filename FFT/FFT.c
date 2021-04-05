@@ -42,6 +42,30 @@ void GenWNm(Complex* p)
 }
 
 // b[n:0]->b[0:n]
+void InvertedArray(Complex* complexArray)
+{
+    uint32_t k = 0;
+    uint32_t j = 0;
+    for (uint32_t i = 0; i < FFT_N - 1; i++)
+    {
+        if (i < j)
+        {
+            SwapComplex(&complexArray[i], &complexArray[j]);
+            //printf("INV_CVT:%d->%d\n", i, j);
+        }
+        // K = 100..00
+        k = FFT_N / 2;
+        while (j >= k)
+        {
+            j -= k;
+            k /= 2;
+        }
+        j += k;
+    }
+}
+
+/*
+// Old Inverted Array
 void InvertedArray(Complex* complexIn, Complex* complexOut)
 {
     uint32_t index_o_calc;
@@ -59,6 +83,7 @@ void InvertedArray(Complex* complexIn, Complex* complexOut)
         //printf("%d->%d\r\n", index_o, index_i);
     }
 }
+*/
 
 // TODO : can be optimized in loop[J]
 void FFTCalc(Complex* complexFFT)

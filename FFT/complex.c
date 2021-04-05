@@ -39,6 +39,14 @@ double ModComplex(Complex complexA)
     return sqrt(complexA.Rez * complexA.Rez + complexA.Imz * complexA.Imz);
 }
 
+void SwapComplex(Complex* complexA, Complex* complexB)
+{
+    Complex complexSwap;
+    memcpy(&complexSwap, (void*)complexA, sizeof(complexSwap));
+    memcpy((void*)complexA, (void*)complexB, sizeof(complexSwap));
+    memcpy((void*)complexB, &complexSwap, sizeof(complexSwap));
+}
+
 void PrintComplex(Complex complexA)
 {
     printf("%c%.6f%c%.6fj", complexA.Rez >= 0 ? '+' : '-', fabs(complexA.Rez),
